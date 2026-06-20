@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CausalFunnel Demo Store — Checkout</title>
+  <style>
+    :root {
+      --bg: #0F172A;
+      --navbar: #1E293B;
+      --card-bg: #1E293B;
+      --primary: #38BDF8;
+      --primary-hover: #0284C7;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --border: #334155;
+      --success: #10B981;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* Header */
+
+    header {
+      background: var(--navbar);
+      color: white;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--primary);
+    }
+
+    nav a {
+      color: #CBD5E1;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* Main */
+
+    main {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* Card */
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 30px;
+      text-align: center;
+      color: var(--text);
+      font-size: 30px;
+    }
+
+    /* Labels */
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    /* Inputs */
+
+    input {
+      width: 100%;
+      padding: 14px;
+      background: #0F172A;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    input::placeholder {
+      color: #64748B;
+    }
+
+    /* Button */
+
+    .btn {
+      width: 100%;
+      margin-top: 30px;
+      padding: 16px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Success Page */
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success .check {
+      font-size: 70px;
+      color: var(--success);
+      margin-bottom: 15px;
+    }
+
+    .success h2 {
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .success p {
+      color: var(--muted);
+    }
+
+    /* Status Pill */
+
+    #status-pill {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      color: var(--success);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-family: monospace;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+    }
+
+    /* Mobile */
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .card {
+        padding: 28px;
+      }
+
+      .card h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🛍️ MetricMart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="product.html">Product</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card" id="checkout-form">
+      <h2>Checkout</h2>
+      <p id="order-summary" style="color: var(--muted); font-size: 14px;"></p>
+      <label>Full name</label>
+      <input type="text" placeholder="Jane Doe" />
+      <label>Card number</label>
+      <input type="text" placeholder="4242 4242 4242 4242" />
+      <label>Shipping address</label>
+      <input type="text" placeholder="123 Market St" />
+      <button class="btn" id="place-order">Place Order</button>
+    </div>
+
+    <div class="card success" id="success-card">
+      <div class="check">✅</div>
+      <h2>Order placed!</h2>
+      <p style="color: var(--muted);">Thanks for testing the demo store.</p>
+      <button class="btn" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+  </main>
+
+  <div id="status-pill">session: loading…</div>
+
+  <script src="tracker.js" data-api-url="http://localhost:4000/api/events"></script>
+
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var item = params.get('item') || 'item';
+    var qty = params.get('qty') || '1';
+    document.getElementById('order-summary').textContent = qty + ' x ' + item + ' — review your details below.';
+
+    document.getElementById('place-order').addEventListener('click', function () {
+      document.getElementById('checkout-form').style.display = 'none';
+      document.getElementById('success-card').style.display = 'block';
+    });
+
+    window.addEventListener('load', function () {
+      var pill = document.getElementById('status-pill');
+      if (window.cfAnalytics) {
+        pill.textContent = 'session: ' + window.cfAnalytics.sessionId.slice(0, 13) + '…';
+      }
+    });
+  </script>
+</body>
+
+</html>

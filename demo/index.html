@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MetricMart — Home</title>
+  <style>
+    :root {
+      --bg: #0F172A;
+      --navbar: #1E293B;
+      --card-bg: #1E293B;
+      --primary: #38BDF8;
+      --primary-hover: #0284C7;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --border: #334155;
+      --success: #10B981;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* Header */
+
+    header {
+      background: var(--navbar);
+      color: white;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--primary);
+    }
+
+    nav a {
+      color: #CBD5E1;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* Main */
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* Hero Section */
+
+    .hero {
+      text-align: center;
+      padding: 80px 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* Button */
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 32px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Product Grid */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    /* Cards */
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card .emoji {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: var(--text);
+      margin: 12px 0 8px;
+      font-size: 20px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .card .price {
+      color: var(--success);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* Footer */
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 50px;
+    }
+
+    /* Status Pill */
+
+    #status-pill {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      color: var(--success);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-family: monospace;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav a {
+        margin: 0 10px;
+      }
+
+      .hero h2 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🛍️ MetricMart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="product.html">Product</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Welcome to the MetricMart</h2>
+      <p>Click around this page — every click and page view is being tracked.</p>
+      <button class="btn" id="cta-shop">Start Shopping</button>
+    </section>
+
+    <section class="grid">
+      <div class="card" data-product="sneakers">
+        <div class="emoji">👟</div>
+        <h3>Running Sneakers</h3>
+        <p>Lightweight, breathable mesh</p>
+        <div class="price">$79.99</div>
+      </div>
+      <div class="card" data-product="backpack">
+        <div class="emoji">🎒</div>
+        <h3>Travel Backpack</h3>
+        <p>30L water-resistant</p>
+        <div class="price">$54.99</div>
+      </div>
+      <div class="card" data-product="headphones">
+        <div class="emoji">🎧</div>
+        <h3>Wireless Headphones</h3>
+        <p>Noise-cancelling, 20hr battery</p>
+        <div class="price">$129.99</div>
+      </div>
+      <div class="card" data-product="watch">
+        <div class="emoji">⌚</div>
+        <h3>Smart Watch</h3>
+        <p>Fitness tracking + GPS</p>
+        <div class="price">$199.99</div>
+      </div>
+    </section>
+  </main>
+
+
+  <div id="status-pill">session: loading…</div>
+
+  <script src="tracker.js" data-api-url="http://localhost:4000/api/events"></script>
+
+  <script>
+
+    window.addEventListener('load', function () {
+      var pill = document.getElementById('status-pill');
+      if (window.cfAnalytics) {
+        pill.textContent = 'session: ' + window.cfAnalytics.sessionId.slice(0, 13) + '…';
+      }
+    });
+
+    document.getElementById('cta-shop').addEventListener('click', function () {
+      window.location.href = 'product.html';
+    });
+
+    document.querySelectorAll('.card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        window.location.href = 'product.html?item=' + card.getAttribute('data-product');
+      });
+    });
+  </script>
+</body>
+
+</html>
